@@ -1,10 +1,14 @@
-import { createStore, applyMiddleware } from 'redux';
-import thunk from 'redux-thunk';
-import { composeWithDevTools } from 'redux-devtools-extension';
+import { configureStore } from '@reduxjs/toolkit';
+import persistStore from 'redux-persist/es/persistStore';
 
-import { reducers } from './rootReducer';
+// import { reducers } from './rootReducer';
+import { middleware, persistedReducers } from './persistor';
 
-export const store = createStore(
-    reducers,
-    composeWithDevTools(applyMiddleware(thunk))
-);
+export const store = configureStore({
+    reducer: persistedReducers,
+    middleware: middleware,
+    // eslint-disable-next-line no-undef
+    devTools: process.env.NODE_ENV === 'development',
+});
+
+export const persistor = persistStore(store);

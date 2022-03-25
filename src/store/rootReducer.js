@@ -1,4 +1,6 @@
-import { combineReducers } from 'redux';
+import { combineReducers } from '@reduxjs/toolkit';
+import counterReducer from './modules/counter/slice';
 
-// to-do: add reducers
-export const reducers = combineReducers({});
+export const reducers = combineReducers({
+    counter: counterReducer,
+});
